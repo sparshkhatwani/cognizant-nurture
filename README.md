@@ -2,6 +2,10 @@
 
 This repository houses the hands-on coding exercises, project implementations, and architectural summaries completed as part of the **Cognizant Digital Nurture – Java FSE Program**. 
 
+> **Name:** Sparsh Khatwani  
+> **Program:** Cognizant Digital Nurture – Full Stack Engineering (Java)  
+> **Duration:** 5 Weeks
+
 The program covers advanced Java engineering concepts including:
 * **Data Structures & Algorithms (DSA)**: Search optimization, memoization, and recurrence models.
 * **Design Patterns & Principles**: Creational and structural patterns conforming to SOLID principles.
@@ -180,3 +184,5 @@ Once running, you can connect to the H2 console to view database schemas and row
 3. **Database Consistency**: Written ACID-compliant PL/SQL procedures, emphasizing transaction checkpoints (`ROLLBACK`/`COMMIT`) and active entity row-locking (`FOR UPDATE`).
 4. **Spring Core Principles**: Understood the transition of Dependency Injection styles from strict XML beans, to constructor requirements, and finally to programmatic configuration.
 5. **Modern ORM Architecture**: Learned to write clean database layers using Spring Data JPA, reducing structural boilerplate while recognizing Hibernate persistence caches underneath.
+
+*Solutions submitted as part of the Cognizant Digital Nurture Java FSE program.*
