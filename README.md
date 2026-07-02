@@ -62,9 +62,10 @@ cognizant-nurture/
 │           └── README.md (Comprehensive architectural concept analysis)
 │
 ├── Week3/
-│   └── spring-learn/
-│       ├── pom.xml
-│       └── src/ (Spring Web initialization project with SLF4J logging)
+│   └── Exercise Spring/
+│       └── spring-learn/
+│           ├── pom.xml
+│           └── src/ (Spring Web & XML bean wiring with Country config)
 │
 └── .gitignore
 ```
@@ -137,12 +138,13 @@ To run and verify the exercises in this repository, you will need:
 
 ---
 
-## 🕸️ Week 3: Spring Web
+## 🕸️ Week 3: Spring Web & Core Integration
 
-#### 1. Spring Web Basics
-* **Exercise 1: Spring Web Project using Maven** ([pom.xml](file:///c:/storage/cognizant-nurture/Week3/spring-learn/pom.xml))
-  * **Objective**: Configure and bootstrap a Spring Boot application with Spring Web MVC dependencies using Maven.
-  * **Implementation**: Initialized a Spring Boot application (`spring-learn`) utilizing Java 17, including `spring-boot-starter-webmvc` and devtools. Configured SLF4J `LOGGER` in [SpringLearnApplication.java](file:///c:/storage/cognizant-nurture/Week3/spring-learn/src/main/java/com/cognizant/spring_learn/SpringLearnApplication.java) to log application startup lifecycle phases ("Application Started" and "Application Finished Starting"). Verified build lifecycle and successful context load tests.
+#### 1. Spring Web Basics & ApplicationContext Wiring
+* **Exercise 1: Spring Web Project with XML Bean Configuration** ([pom.xml](file:///c:/storage/cognizant-nurture/Week3/Exercise%20Spring/spring-learn/pom.xml))
+  * **Objective**: Configure a Spring Boot application with Web MVC dependencies and integrate XML-based application context configuration.
+  * **Implementation**: Initialized a Spring Boot application (`spring-learn`) utilizing Java 17, adding `spring-context` and `spring-boot-starter-webmvc` dependencies. Created a `Country` bean class ([Country.java](file:///c:/storage/cognizant-nurture/Week3/Exercise%20Spring/spring-learn/src/main/java/com/cognizant/spring_learn/Country.java)) and configured a bean definition mapping the properties `code` ("IN") and `name` ("India") inside [country.xml](file:///c:/storage/cognizant-nurture/Week3/Exercise%20Spring/spring-learn/src/main/resources/country.xml).
+  * **Execution Logic**: Inside [SpringLearnApplication.java](file:///c:/storage/cognizant-nurture/Week3/Exercise%20Spring/spring-learn/src/main/java/com/cognizant/spring_learn/SpringLearnApplication.java), initialized a `ClassPathXmlApplicationContext` instance to load the XML configuration, retrieved the `country` bean, and printed/logged the bean contents.
 
 ---
 
@@ -183,7 +185,7 @@ mvn clean compile
 mvn spring-boot:run
 
 # Example: Running the Week 3 Spring Web Application
-cd Week3/spring-learn
+cd "Week3/Exercise Spring/spring-learn"
 ./mvnw spring-boot:run
 ```
 
@@ -202,6 +204,6 @@ Once running, you can connect to the H2 console to view database schemas and row
 3. **Database Consistency**: Written ACID-compliant PL/SQL procedures, emphasizing transaction checkpoints (`ROLLBACK`/`COMMIT`) and active entity row-locking (`FOR UPDATE`).
 4. **Spring Core Principles**: Understood the transition of Dependency Injection styles from strict XML beans, to constructor requirements, and finally to programmatic configuration.
 5. **Modern ORM Architecture**: Learned to write clean database layers using Spring Data JPA, reducing structural boilerplate while recognizing Hibernate persistence caches underneath.
-6. **Spring Web Bootstrapping**: Configured and initialized a Spring Boot Web MVC application utilizing Maven wrappers, handling custom packages and application lifecycle logging with SLF4J.
+6. **Spring XML Configuration & Web**: Configured and initialized a Spring Boot application utilizing Maven, loaded XML bean configurations via `ClassPathXmlApplicationContext`, and integrated application lifecycle logging using SLF4J.
 
 *Solutions submitted as part of the Cognizant Digital Nurture Java FSE program.*
