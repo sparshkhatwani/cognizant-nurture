@@ -61,6 +61,11 @@ cognizant-nurture/
 │           ├── JPA_vs_Hibernate_vs_SpringDataJPA.java (Multi-layered code comparison)
 │           └── README.md (Comprehensive architectural concept analysis)
 │
+├── Week3/
+│   └── spring-learn/
+│       ├── pom.xml
+│       └── src/ (Spring Web initialization project with SLF4J logging)
+│
 └── .gitignore
 ```
 
@@ -132,6 +137,15 @@ To run and verify the exercises in this repository, you will need:
 
 ---
 
+## 🕸️ Week 3: Spring Web
+
+#### 1. Spring Web Basics
+* **Exercise 1: Spring Web Project using Maven** ([pom.xml](file:///c:/storage/cognizant-nurture/Week3/spring-learn/pom.xml))
+  * **Objective**: Configure and bootstrap a Spring Boot application with Spring Web MVC dependencies using Maven.
+  * **Implementation**: Initialized a Spring Boot application (`spring-learn`) utilizing Java 17, including `spring-boot-starter-webmvc` and devtools. Configured SLF4J `LOGGER` in [SpringLearnApplication.java](file:///c:/storage/cognizant-nurture/Week3/spring-learn/src/main/java/com/cognizant/spring_learn/SpringLearnApplication.java) to log application startup lifecycle phases ("Application Started" and "Application Finished Starting"). Verified build lifecycle and successful context load tests.
+
+---
+
 ## 🚀 Execution & Verification Instructions
 
 ### Running Java Console Applications (Week 1 DSA & Patterns)
@@ -159,7 +173,7 @@ Load the `.sql` scripts into your SQL Developer, SQLPlus, or Oracle CLI client:
 ```
 *Note: Make sure your console has server output enabled (`SET SERVEROUTPUT ON SIZE UNLIMITED;` is already included at the top of both files).*
 
-### Building and Running Week 2 Spring Maven Applications
+### Building and Running Spring Boot Maven Applications (Week 2 & 3)
 Run Maven commands inside the specific project folder:
 
 ```bash
@@ -167,6 +181,10 @@ Run Maven commands inside the specific project folder:
 cd Week2/Spring_Data_JPA/Exercise1_SpringDataJPA_QuickExample
 mvn clean compile
 mvn spring-boot:run
+
+# Example: Running the Week 3 Spring Web Application
+cd Week3/spring-learn
+./mvnw spring-boot:run
 ```
 
 Once running, you can connect to the H2 console to view database schemas and rows:
@@ -184,5 +202,6 @@ Once running, you can connect to the H2 console to view database schemas and row
 3. **Database Consistency**: Written ACID-compliant PL/SQL procedures, emphasizing transaction checkpoints (`ROLLBACK`/`COMMIT`) and active entity row-locking (`FOR UPDATE`).
 4. **Spring Core Principles**: Understood the transition of Dependency Injection styles from strict XML beans, to constructor requirements, and finally to programmatic configuration.
 5. **Modern ORM Architecture**: Learned to write clean database layers using Spring Data JPA, reducing structural boilerplate while recognizing Hibernate persistence caches underneath.
+6. **Spring Web Bootstrapping**: Configured and initialized a Spring Boot Web MVC application utilizing Maven wrappers, handling custom packages and application lifecycle logging with SLF4J.
 
 *Solutions submitted as part of the Cognizant Digital Nurture Java FSE program.*
