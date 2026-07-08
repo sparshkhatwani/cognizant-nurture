@@ -12,6 +12,8 @@ The program covers advanced Java engineering concepts including:
 * **Database Programming (PL/SQL)**: Stored procedures, cursor control, ACID transaction processing, and logic routing.
 * **Spring Core & Maven**: Dependency Injection (DI), Inversion of Control (IoC), XML/Java configuration models, and Maven dependency management.
 * **Spring Data JPA & Hibernate**: Object-Relational Mapping (ORM), repository pattern abstractions, custom query derivations (`@Query`), and JPA spec comparisons.
+* **Spring Security & RESTful Services**: Building authenticated REST APIs using Spring Boot, Spring Security, Basic Authentication, and JSON Web Tokens (JWT).
+* **Microservices with Spring Boot**: Decoupled, production-ready, domain-focused RESTful API services configured on independent network ports.
 
 ---
 
@@ -62,10 +64,31 @@ cognizant-nurture/
 │           └── README.md (Comprehensive architectural concept analysis)
 │
 ├── Week3/
-│   └── Exercise Spring/
-│       └── spring-learn/
+│   ├── handson1-Create-Spring-Web-Project/
+│   │   └── spring-learn/ (Basic Spring Boot Web MVC configuration & SLF4J setup)
+│   ├── handson4-Load-Country-From-XML/
+│   │   └── spring-learn/ (XML context bean loading with ClassPathXmlApplicationContext)
+│   ├── handson5-Hello-World-REST-Service/
+│   │   └── spring-learn/ (Spring REST Controller exposing /hello)
+│   ├── handson6-REST-Country-Web-Service/
+│   │   └── spring-learn/ (Exposing country bean loaded via country.xml under /country)
+│   ├── handson7-REST-Get-Country-By-Code/
+│   │   └── spring-learn/ (Path variable mapping under /countries/{code} via CountryService)
+│   ├── handson8-Create-Authentication-Service-Returns-JWT/
+│   │   └── spring-learn/ (Token generation using io.jsonwebtoken on endpoint /authenticate)
+│   ├── handson9-Read-Authorization-Header/
+│   │   └── spring-learn/ (Integrating Basic Auth SecurityConfig for accessing /authenticate)
+│   └── handson10-Generate-JWT-Token/
+│       └── spring-learn/ (Complete secure country service utilizing basic auth and JWT token utilities)
+│
+├── Week4/
+│   └── Creating-Microservices-for-account-and-loan/
+│       ├── account/
+│       │   ├── pom.xml
+│       │   └── src/ (Spring Boot account microservice with GET /accounts/{number})
+│       └── loan/
 │           ├── pom.xml
-│           └── src/ (Spring Web & XML bean wiring with Country config)
+│           └── src/ (Spring Boot loan microservice on port 8081 with GET /loans/{number})
 │
 └── .gitignore
 ```
@@ -76,9 +99,10 @@ cognizant-nurture/
 
 To run and verify the exercises in this repository, you will need:
 * **Java Development Kit (JDK 11 or higher)** (Java 11 or 17 recommended)
-* **Apache Maven 3.6+** (for building Week 2 Spring projects)
-* **Oracle Database (11g/12c/19c/21c Express Edition)** or an Oracle SQL-compliant interpreter (for PL/SQL exercises)
+* **Apache Maven 3.6+** (for building Spring/Spring Boot projects)
+* **Oracle Database** or an Oracle SQL-compliant interpreter (for PL/SQL exercises)
 * **H2 Database engine** (embedded automatically in the Spring Data JPA project)
+* **JSON Web Tokens (JWT) Dependency**: `io.jsonwebtoken` library (used in Week 3 JWT hands-on)
 
 ---
 
@@ -87,34 +111,22 @@ To run and verify the exercises in this repository, you will need:
 ### ⚡ Week 1: Algorithms, Design Patterns, and PL/SQL
 
 #### 1. Algorithms & Data Structures
-* **Exercise 2: E-Commerce Platform Search Optimization** ([EcommercePlatformSearch.java](file:///c:/storage/cognizant-nurture/Week1/Algorithms_Data_Structure/Exercise2_EcommercePlatformSearch/EcommercePlatformSearch.java))
-  * **Objective**: Contrast Linear Search and Binary Search performance.
-  * **Implementation**: Uses a custom `Product` class with `id`, `name`, `category`, and `price`. Includes a case-insensitive name-based linear search ($O(n)$) and an iterative ID-based binary search ($O(\log n)$) on sorted copies of the array. Handles empty/null inputs gracefully.
+* **Exercise 2: E-Commerce Search** ([EcommercePlatformSearch.java](file:///c:/storage/cognizant-nurture/Week1/Algorithms_Data_Structure/Exercise2_EcommercePlatformSearch/EcommercePlatformSearch.java))
+  * Uses a custom `Product` class with `id`, `name`, `category`, and `price`. Contrasts case-insensitive name-based linear search ($O(n)$) and sorted ID-based binary search ($O(\log n)$).
 * **Exercise 7: Financial Forecasting** ([FinancialForecasting.java](file:///c:/storage/cognizant-nurture/Week1/Algorithms_Data_Structure/Exercise7_FinancialForecasting/FinancialForecasting.java))
-  * **Objective**: Compound-interest growth calculations using recursion and memoization.
-  * **Implementation**: Implements plain recursion, memoized recursion using a `HashMap` cache to eliminate overlapping sub-problems, and a flat iterative approach to avoid stack overflow risks for large time horizons.
+  * Implements future-value calculations using plain recursion, memoization cache via `HashMap` to speed up sub-problems, and a flat iterative approach to avoid stack overflows.
 
 #### 2. Design Patterns & Principles
-* **Exercise 1: Singleton Pattern Logger** ([SingletonPatternDemo.java](file:///c:/storage/cognizant-nurture/Week1/Design_Patterns_and_Principles/Exercise1_SingletonPattern/SingletonPatternDemo.java))
-  * **Objective**: Implement a globally accessible, thread-safe logger service.
-  * **Implementation**: Built a thread-safe `Logger` using **Double-Checked Locking (DCL)** and a `volatile` instance variable to guarantee memory visibility and prevent JVM instruction reordering. Validated thread-safety via concurrent worker thread simulation (`Thread.join()`).
+* **Exercise 1: Singleton Logger** ([SingletonPatternDemo.java](file:///c:/storage/cognizant-nurture/Week1/Design_Patterns_and_Principles/Exercise1_SingletonPattern/SingletonPatternDemo.java))
+  * Built a thread-safe `Logger` using **Double-Checked Locking (DCL)** and a `volatile` instance variable to guarantee visibility.
 * **Exercise 2: Factory Method Document System** ([FactoryMethodPatternDemo.java](file:///c:/storage/cognizant-nurture/Week1/Design_Patterns_and_Principles/Exercise2_FactoryMethodPattern/FactoryMethodPatternDemo.java))
-  * **Objective**: Create a polymorphic Document Management System conforming to the Open/Closed Principle (OCP).
-  * **Implementation**: Defined abstract `Document` products (`Word`, `Pdf`, `Excel`) and matching `DocumentCreator` classes. Shows how new formats (like `XmlDocument`) are added seamlessly without modifying any existing system classes.
+  * Implemented polymorphic creators (`WordCreator`, `PdfCreator`, etc.) defining document interfaces, matching SOLID's Open/Closed Principle.
 
 #### 3. PL/SQL Database Programming
 * **Exercise 1: Control Structures** ([ControlStructures.sql](file:///c:/storage/cognizant-nurture/Week1/PLSQL_Exercises/Exercise1_ControlStructures/ControlStructures.sql))
-  * **Objective**: Implement conditional routing and looping patterns in PL/SQL.
-  * **Implementation**: 
-    * `IF-ELSIF-ELSE`: Dynamic age categorization (Young/Middle-Aged/Senior) and preferred interest rate assignment.
-    * `CASE`: Credit score checks (Bands: $\ge 750$, $700\text{-}749$, etc.) to determine loan eligibility.
-    * `LOOP` & `WHILE LOOP`: Iterative product discount scaling and compound growth balance doubling simulations.
+  * Implemented age categorization, credit score evaluations, loan approvals, and loop constructs.
 * **Exercise 3: Stored Procedures** ([StoredProcedures.sql](file:///c:/storage/cognizant-nurture/Week1/PLSQL_Exercises/Exercise3_StoredProcedures/StoredProcedures.sql))
-  * **Objective**: Build robust stored procedures handling transactions, cursors, and custom exceptions.
-  * **Implementation**:
-    * `ProcessMonthlyInterest`: Auto-credits monthly interest on accounts; validates freezing limits.
-    * `UpdateEmployeeBonus`: Adjusts salaries by department percentage caps using `FOR UPDATE` cursor locking.
-    * `TransferFunds`: Fully ACID-compliant money transfer between accounts. Implements balance checks, regulatory minimums, double debits/credits, custom exception auditing, and log tables.
+  * Implemented transaction boundaries (`TransferFunds`), batch updates with row-locking (`UpdateEmployeeBonus`), and interest crediting procedures.
 
 ---
 
@@ -122,29 +134,55 @@ To run and verify the exercises in this repository, you will need:
 
 #### 1. Spring Core & Maven
 * **Exercise 1: XML Basic Wiring** ([pom.xml](file:///c:/storage/cognizant-nurture/Week2/Spring_Core_Maven/Exercise1_ConfiguringBasicSpringApp/pom.xml))
-  * Uses XML-based Spring ApplicationContext config to wire `BookRepositoryImpl` and `BookServiceImpl` using Setter Injection.
+  * Demonstrates XML bean declaration inside application contexts to resolve dependency mappings via setter injection.
 * **Exercise 2: Dependency Injection Models** ([pom.xml](file:///c:/storage/cognizant-nurture/Week2/Spring_Core_Maven/Exercise2_ImplementingDependencyInjection/pom.xml))
-  * Demonstrates the structural differences between Setter-based injection and Constructor-based injection in Spring Core.
+  * Compares XML-configured constructor injection vs setter injection models.
 * **Exercise 4: Java Configuration Bean Wiring** ([pom.xml](file:///c:/storage/cognizant-nurture/Week2/Spring_Core_Maven/Exercise4_CreatingConfiguringMavenProject/pom.xml))
-  * Migrates from XML namespaces to type-safe Java configuration using `@Configuration` and `@Bean` definitions in an application context.
+  * Migrates XML namespace declarations to type-safe Java configuration using `@Configuration` and `@Bean` definitions.
 
 #### 2. Spring Data JPA
 * **Exercise 1: Bootstrapped CRUD Demo** ([pom.xml](file:///c:/storage/cognizant-nurture/Week2/Spring_Data_JPA/Exercise1_SpringDataJPA_QuickExample/pom.xml))
-  * **Objective**: Rapid database development using Spring Boot and JPA repository interfaces.
-  * **Implementation**: Configures an in-memory H2 database populated by `data.sql` on startup. Implements derived queries (e.g. `findByDepartment`, `findByFirstNameContainingIgnoreCase`) and custom JPQL queries using `@Query`. Runs a complete lifecycle sequence (Save, Read, Filter, Update, Delete) via a `CommandLineRunner` hook.
+  * Implements custom JPQL and derived query patterns (`findByDepartment`, `@Query` annotations) with Spring Boot, Spring Data JPA, and in-memory H2.
 * **Exercise 2: JPA vs. Hibernate vs. Spring Data JPA** ([JPA_vs_Hibernate_vs_SpringDataJPA.java](file:///c:/storage/cognizant-nurture/Week2/Spring_Data_JPA/Exercise2_JPA_Hibernate_SpringDataJPA_Differences/JPA_vs_Hibernate_vs_SpringDataJPA.java))
-  * **Objective**: Demystify differences between Specification (JPA), Provider (Hibernate), and Abstraction Layer (Spring Data JPA).
-  * **Implementation**: Offers side-by-side working code blocks of raw JPA API (`EntityManager`), Hibernate Native API (`Session`), and Spring Data JPA (`JpaRepository`) mapping the same entity. Accompanied by a detailed conceptual overview [README](file:///c:/storage/cognizant-nurture/Week2/Spring_Data_JPA/Exercise2_JPA_Hibernate_SpringDataJPA_Differences/README.md).
+  * Side-by-side working comparison of raw JPA API (`EntityManager`), Hibernate API (`Session`), and Spring Data JPA (`JpaRepository`) mapping the same entity.
 
 ---
 
-## 🕸️ Week 3: Spring Web & Core Integration
+### 🕸️ Week 3: Spring Web & Core Integration
 
-#### 1. Spring Web Basics & ApplicationContext Wiring
-* **Exercise 1: Spring Web Project with XML Bean Configuration** ([pom.xml](file:///c:/storage/cognizant-nurture/Week3/Exercise%20Spring/spring-learn/pom.xml))
-  * **Objective**: Configure a Spring Boot application with Web MVC dependencies and integrate XML-based application context configuration.
-  * **Implementation**: Initialized a Spring Boot application (`spring-learn`) utilizing Java 17, adding `spring-context` and `spring-boot-starter-webmvc` dependencies. Created a `Country` bean class ([Country.java](file:///c:/storage/cognizant-nurture/Week3/Exercise%20Spring/spring-learn/src/main/java/com/cognizant/spring_learn/Country.java)) and configured a bean definition mapping the properties `code` ("IN") and `name` ("India") inside [country.xml](file:///c:/storage/cognizant-nurture/Week3/Exercise%20Spring/spring-learn/src/main/resources/country.xml).
-  * **Execution Logic**: Inside [SpringLearnApplication.java](file:///c:/storage/cognizant-nurture/Week3/Exercise%20Spring/spring-learn/src/main/java/com/cognizant/spring_learn/SpringLearnApplication.java), initialized a `ClassPathXmlApplicationContext` instance to load the XML configuration, retrieved the `country` bean, and printed/logged the bean contents.
+This week focuses on building RESTful Web Services using Spring Boot, integrating XML Bean Contexts, and securing endpoints using Spring Security with JWT.
+
+* **handson1-Create-Spring-Web-Project** ([spring-learn](file:///c:/storage/cognizant-nurture/Week3/handson1-Create-Spring-Web-Project/spring-learn)):
+  * Configures a basic Spring Boot web application, verifies configuration using `@SpringBootApplication`, and adds SLF4J logging.
+* **handson4-Load-Country-From-XML** ([spring-learn](file:///c:/storage/cognizant-nurture/Week3/handson4-Load-Country-From-XML/spring-learn)):
+  * Uses `ClassPathXmlApplicationContext` inside the application main to load standard bean definition files (`country.xml`) representing country properties (`code`, `name`).
+* **handson5-Hello-World-REST-Service** ([spring-learn](file:///c:/storage/cognizant-nurture/Week3/handson5-Hello-World-REST-Service/spring-learn)):
+  * Implements the first REST endpoint `/hello` returning standard text using `@RestController` and `@GetMapping`.
+* **handson6-REST-Country-Web-Service** ([spring-learn](file:///c:/storage/cognizant-nurture/Week3/handson6-REST-Country-Web-Service/spring-learn)):
+  * Connects XML parsing with REST APIs: Exposes a `/country` endpoint that retrieves the bean mapped from `country.xml` and returns it as a JSON payload.
+* **handson7-REST-Get-Country-By-Code** ([spring-learn](file:///c:/storage/cognizant-nurture/Week3/handson7-REST-Get-Country-By-Code/spring-learn)):
+  * Adds `CountryService` which extracts a list of countries from XML. Implements dynamic parameter lookup: `GET /countries/{code}` queries the list to locate matches.
+* **handson8-Create-Authentication-Service-Returns-JWT** ([spring-learn](file:///c:/storage/cognizant-nurture/Week3/handson8-Create-Authentication-Service-Returns-JWT/spring-learn)):
+  * Sets up JWT utilities (`JwtUtil`) using the `io.jsonwebtoken` library. Exposes `GET /authenticate` which decodes Basic Credentials and generates a signed JWT payload.
+* **handson9-Read-Authorization-Header** ([spring-learn](file:///c:/storage/cognizant-nurture/Week3/handson9-Read-Authorization-Header/spring-learn)):
+  * Introduces Spring Security configuration (`SecurityConfig`) to restrict access. Endpoint `/authenticate` is accessible to users with roles `USER` and `ADMIN`, while `/countries/**` is locked down to `USER` roles.
+* **handson10-Generate-JWT-Token** ([spring-learn](file:///c:/storage/cognizant-nurture/Week3/handson10-Generate-JWT-Token/spring-learn)):
+  * Consolidates authentication, authorization roles, logging, and token generation into a secure, production-like REST API.
+
+---
+
+### ☁️ Week 4: Microservices with Spring Boot
+
+* **Project Location**: [Creating-Microservices-for-account-and-loan](file:///c:/storage/cognizant-nurture/Week4/Creating-Microservices-for-account-and-loan)
+* **Objective**: Design and run multiple decoupled RESTful microservices representing separate banking domains (Accounts & Loans) on isolated network ports.
+* **Account Microservice** ([account](file:///c:/storage/cognizant-nurture/Week4/Creating-Microservices-for-account-and-loan/account)):
+  * **Configuration**: Runs on default port `8080` with application name `account`.
+  * **Model**: `Account` model consisting of properties: `number` (String), `type` (String), and `balance` (double).
+  * **Endpoint**: Exposes `GET /accounts/{number}` through [AccountController.java](file:///c:/storage/cognizant-nurture/Week4/Creating-Microservices-for-account-and-loan/account/src/main/java/com/cognizant/account/controller/AccountController.java) returning a mock savings account.
+* **Loan Microservice** ([loan](file:///c:/storage/cognizant-nurture/Week4/Creating-Microservices-for-account-and-loan/loan)):
+  * **Configuration**: Runs on custom port `8081` with application name `loan` to avoid conflict.
+  * **Model**: `Loan` model consisting of properties: `number` (String), `type` (String), `loan` (double), `emi` (double), and `tenure` (int).
+  * **Endpoint**: Exposes `GET /loans/{number}` through [LoanController.java](file:///c:/storage/cognizant-nurture/Week4/Creating-Microservices-for-account-and-loan/loan/src/main/java/com/cognizant/loan/controller/LoanController.java) returning a mock car loan.
 
 ---
 
@@ -173,9 +211,9 @@ Load the `.sql` scripts into your SQL Developer, SQLPlus, or Oracle CLI client:
 @c:/storage/cognizant-nurture/Week1/PLSQL_Exercises/Exercise1_ControlStructures/ControlStructures.sql
 @c:/storage/cognizant-nurture/Week1/PLSQL_Exercises/Exercise3_StoredProcedures/StoredProcedures.sql
 ```
-*Note: Make sure your console has server output enabled (`SET SERVEROUTPUT ON SIZE UNLIMITED;` is already included at the top of both files).*
+*Note: Make sure server output is enabled using `SET SERVEROUTPUT ON SIZE UNLIMITED;` before execution.*
 
-### Building and Running Spring Boot Maven Applications (Week 2 & 3)
+### Running Week 2 Spring Boot Applications
 Run Maven commands inside the specific project folder:
 
 ```bash
@@ -183,17 +221,40 @@ Run Maven commands inside the specific project folder:
 cd Week2/Spring_Data_JPA/Exercise1_SpringDataJPA_QuickExample
 mvn clean compile
 mvn spring-boot:run
+```
 
-# Example: Running the Week 3 Spring Web Application
-cd "Week3/Exercise Spring/spring-learn"
+### Running Week 3 Spring Boot REST & JWT Services
+Each project runs on port `8083` (configured via `application.properties`). To run any project:
+
+```bash
+# Navigate to the chosen handson folder
+cd "Week3/handson10-Generate-JWT-Token/spring-learn"
 ./mvnw spring-boot:run
 ```
 
-Once running, you can connect to the H2 console to view database schemas and rows:
-* **H2 Console URL**: `http://localhost:8080/h2-console`
-* **JDBC URL**: `jdbc:h2:mem:employeedb`
-* **Username**: `sa`
-* **Password**: *(leave blank)*
+#### Verification Endpoints (Week 3, Port 8083):
+* **Hello World**: `GET http://localhost:8083/hello`
+* **Get Country India**: `GET http://localhost:8083/country`
+* **Get Country by Code**: `GET http://localhost:8083/countries/IN`
+* **JWT Authenticate**: `GET http://localhost:8083/authenticate`
+  * *Authentication requires Basic Auth headers. Header value format: `Authorization: Basic dXNlcjpwd2Q=` (Base64 encoding of `user:pwd` or `admin:pwd`).*
+
+### Running Week 4 Spring Boot Microservices
+Run each service in a separate terminal window:
+
+```bash
+# Run Account Microservice (runs on port 8080)
+cd "Week4/Creating-Microservices-for-account-and-loan/account"
+./mvnw spring-boot:run
+
+# Run Loan Microservice (runs on port 8081)
+cd "Week4/Creating-Microservices-for-account-and-loan/loan"
+./mvnw spring-boot:run
+```
+
+#### Verification Endpoints (Week 4):
+* **Account Info**: `GET http://localhost:8080/accounts/12345`
+* **Loan Info**: `GET http://localhost:8081/loans/98765`
 
 ---
 
@@ -205,5 +266,7 @@ Once running, you can connect to the H2 console to view database schemas and row
 4. **Spring Core Principles**: Understood the transition of Dependency Injection styles from strict XML beans, to constructor requirements, and finally to programmatic configuration.
 5. **Modern ORM Architecture**: Learned to write clean database layers using Spring Data JPA, reducing structural boilerplate while recognizing Hibernate persistence caches underneath.
 6. **Spring XML Configuration & Web**: Configured and initialized a Spring Boot application utilizing Maven, loaded XML bean configurations via `ClassPathXmlApplicationContext`, and integrated application lifecycle logging using SLF4J.
+7. **API Security (JWT & Basic Auth)**: Gained proficiency in encoding credentials, generating signed cryptographic tokens (JWT), and using Spring Security Filters to authenticate API endpoints and enforce role authorization.
+8. **Microservices & Decoupled Architecture**: Designed and built independent RESTful microservices with Spring Boot, configuring custom service ports to isolate business domains and prevent port collisions in a localized dev environment.
 
 *Solutions submitted as part of the Cognizant Digital Nurture Java FSE program.*
