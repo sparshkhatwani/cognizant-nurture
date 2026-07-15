@@ -102,7 +102,7 @@ cognizant-nurture/
 │   ├── HandsOn-12-React-ticketbookingapp/
 │   │   └── ticketbookingapp/ (React 19 ticket booking app)
 │   ├── HandsOn-13-React-bloggerapp/
-│   └── HandsOn-5-React/
+│   └── HandsOn-05-React/
 │       └── cohort-tracker/ (React practice app)
 │
 └── .gitignore
