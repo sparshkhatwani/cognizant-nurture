@@ -1,0 +1,39 @@
+import BookDetails from "./components/BookDetails";
+import BlogDetails from "./components/BlogDetails";
+import CourseDetails from "./components/CourseDetails";
+
+import { books } from "./data/books";
+import { blogs } from "./data/blogs";
+import { courses } from "./data/courses";
+
+function App() {
+
+  const showBooks = true;
+  const showBlogs = true;
+  const showCourses = true;
+
+  return (
+
+    <div className="container">
+
+      {showCourses && (
+        <CourseDetails courses={courses} />
+      )}
+
+      {showBooks ? (
+        <BookDetails books={books} />
+      ) : (
+        <h2>No Books Available</h2>
+      )}
+
+      {showBlogs && (
+        <BlogDetails blogs={blogs} />
+      )}
+
+    </div>
+
+  );
+
+}
+
+export default App;
