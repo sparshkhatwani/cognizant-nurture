@@ -14,6 +14,7 @@ The program covers advanced Java engineering concepts including:
 * **Spring Data JPA & Hibernate**: Object-Relational Mapping (ORM), repository pattern abstractions, custom query derivations (`@Query`), and JPA spec comparisons.
 * **Spring Security & RESTful Services**: Building authenticated REST APIs using Spring Boot, Spring Security, Basic Authentication, and JSON Web Tokens (JWT).
 * **Microservices with Spring Boot**: Decoupled, production-ready, domain-focused RESTful API services configured on independent network ports.
+* **Frontend Development with React**: Component-based UI development, JSX, event handling, lifecycle concepts, and modern React app setup.
 
 ---
 
@@ -90,6 +91,20 @@ cognizant-nurture/
 │           ├── pom.xml
 │           └── src/ (Spring Boot loan microservice on port 8081 with GET /loans/{number})
 │
+├── Week5/
+│   ├── HandsOn-01-React-Setup/
+│   ├── HandsOn-02-React-Components/
+│   ├── HandsOn-03-Function-Component/
+│   ├── HandsOn-04-Component-Lifecycle/
+│   ├── HandsOn-09-ES6/
+│   ├── HandsOn-10-React-JSX/
+│   ├── HandsOn-11-React-Event-Handling/
+│   ├── HandsOn-12-React-ticketbookingapp/
+│   │   └── ticketbookingapp/ (React 19 ticket booking app)
+│   ├── HandsOn-13-React-bloggerapp/
+│   └── HandsOn-5-React/
+│       └── cohort-tracker/ (React practice app)
+│
 └── .gitignore
 ```
 
@@ -100,6 +115,7 @@ cognizant-nurture/
 To run and verify the exercises in this repository, you will need:
 * **Java Development Kit (JDK 11 or higher)** (Java 11 or 17 recommended)
 * **Apache Maven 3.6+** (for building Spring/Spring Boot projects)
+* **Node.js and npm** (for the React exercises in Week 5)
 * **Oracle Database** or an Oracle SQL-compliant interpreter (for PL/SQL exercises)
 * **H2 Database engine** (embedded automatically in the Spring Data JPA project)
 * **JSON Web Tokens (JWT) Dependency**: `io.jsonwebtoken` library (used in Week 3 JWT hands-on)
@@ -186,6 +202,20 @@ This week focuses on building RESTful Web Services using Spring Boot, integratin
 
 ---
 
+### ⚛️ Week 5: React Frontend Hands-On
+
+This week introduces modern frontend development using React, covering core concepts such as components, JSX, event handling, lifecycle behavior, and component-based UI design.
+
+* **Ticket Booking App** ([ticketbookingapp](Week5/HandsOn-12-React-ticketbookingapp/ticketbookingapp))
+  * A React-based booking experience built with `react-scripts` and React 19.
+  * Run from the app folder using `npm install` and `npm start`.
+* **Cohort Tracker** ([cohort-tracker](Week5/HandsOn-5-React/cohort-tracker))
+  * A practice React app for component-based UI development and state-driven views.
+* **Additional React Exercises**
+  * Includes setup, component, lifecycle, ES6, JSX, and event-handling hands-on projects under [Week5](Week5).
+
+---
+
 ## 🚀 Execution & Verification Instructions
 
 ### Running Java Console Applications (Week 1 DSA & Patterns)
@@ -255,6 +285,23 @@ cd "Week4/Creating-Microservices-for-account-and-loan/loan"
 #### Verification Endpoints (Week 4):
 * **Account Info**: `GET http://localhost:8080/accounts/12345`
 * **Loan Info**: `GET http://localhost:8081/loans/98765`
+
+### Running Week 5 React Applications
+Navigate into the app folder before starting it:
+
+```bash
+# Ticket Booking App
+cd "Week5/HandsOn-12-React-ticketbookingapp/ticketbookingapp"
+npm install
+npm start
+
+# Cohort Tracker App
+cd "Week5/HandsOn-5-React/cohort-tracker"
+npm install
+npm start
+```
+
+> If you run the command from the parent folder, make sure to target the correct subfolder because the React app’s `package.json` is inside the project directory.
 
 ---
 
